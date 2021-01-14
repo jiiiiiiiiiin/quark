@@ -1,7 +1,7 @@
 import smbus
-import time
-class mpu6050:
 
+
+class mpu6050:
     # Global Variables
     GRAVITIY_MS2 = 9.80665
     address = None
@@ -51,7 +51,8 @@ class mpu6050:
         self.bus = smbus.SMBus(bus)
         # Wake up the MPU-6050 since it starts in sleep mode
         self.bus.write_byte_data(self.address, self.PWR_MGMT_1, 0x00)
-        self.sum_data = [0,0,0, 0,0,0]
+        self.sum_data = [0, 0, 0, 0, 0, 0]
+
     # I2C communication methods
 
     def read_i2c_word(self, register):
@@ -95,7 +96,7 @@ class mpu6050:
         # Write the new range to the ACCEL_CONFIG register
         self.bus.write_byte_data(self.address, self.ACCEL_CONFIG, accel_range)
 
-    def read_accel_range(self, raw = False):
+    def read_accel_range(self, raw=False):
         """Reads the range the accelerometer is set to.
         If raw is True, it will return the raw value from the ACCEL_CONFIG
         register
@@ -118,7 +119,7 @@ class mpu6050:
             else:
                 return -1
 
-    def get_accel_data(self, g = False):
+    def get_accel_data(self, g=False):
         """Gets and returns the X, Y and Z values from the accelerometer.
         If g is True, it will return the data in g
         If g is False, it will return the data in m/s^2
@@ -166,7 +167,7 @@ class mpu6050:
         # Write the new range to the ACCEL_CONFIG register
         self.bus.write_byte_data(self.address, self.GYRO_CONFIG, gyro_range)
 
-    def read_gyro_range(self, raw = False):
+    def read_gyro_range(self, raw=False):
         """Reads the range the gyroscope is set to.
         If raw is True, it will return the raw value from the GYRO_CONFIG
         register.
@@ -203,22 +204,19 @@ class mpu6050:
         return {'x': x, 'y': y, 'z': z}
 
     def calibration(self):
-        
+
         n = 100
         for i in range(n):
             self.sum_data[0] += self.read_i2c_word(self.ACCEL_XOUT0)
             self.sum_data[1] += self.read_i2c_word(self.ACCEL_YOUT0)
             self.sum_data[2] += self.read_i2c_word(self.ACCEL_ZOUT0)
 
-
             self.sum_data[3] += self.read_i2c_word(self.GYRO_XOUT0)
             self.sum_data[4] += self.read_i2c_word(self.GYRO_YOUT0)
             self.sum_data[5] += self.read_i2c_word(self.GYRO_ZOUT0)
 
-
         for i in range(6):
             self.sum_data[i] /= n
-
 
     def get_all_data(self):
         """Reads and returns all the available data."""
@@ -228,12 +226,11 @@ class mpu6050:
 
         return [accel, gyro, temp]
 
+
 if __name__ == "__main__":
     mpu = mpu6050(0x68)
-    mpu.set_gyro_range(0x18) # 2000deg/s
+    mpu.set_gyro_range(0x18)  # 2000deg/s
     mpu.calibration()
-    while(True):
+    while (True):
         accel_data = mpu.get_accel_data()
         gyro_data = mpu.get_gyro_data()
-
-
