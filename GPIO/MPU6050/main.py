@@ -1,6 +1,6 @@
 import time
 
-from GPIO.MPU6050 import mpu6050, ano_dt, imu
+import mpu6050, ano_dt, imu
 
 if __name__ == "__main__":
     mpu = mpu6050.mpu6050(0x68)
