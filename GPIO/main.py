@@ -1,6 +1,4 @@
-import imu
-import mpu6050
-import ano_dt
+from GPIO import imu, mpu6050, ano_dt
 import time
 
 
