@@ -1,10 +1,13 @@
 import time
 
-from GPIO.MPU6050 import mpu6050, ano_dt, imu
+import mpu6050
+import ano_dt
+import imu
 
 if __name__ == "__main__":
     mpu = mpu6050.mpu6050(0x68)
     mpu.set_gyro_range(0x18)  # 设置陀螺仪范围 2000deg/s
+    mpu.calibration()  # 校准
     imu = imu.Mahony()  # 姿态解算
     ANO_DT = ano_dt.ANO_DT()  # 匿名上位机
     time_last = time.time()

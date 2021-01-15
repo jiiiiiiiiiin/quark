@@ -5,7 +5,7 @@
 
 ## 1.使用方法
 
- - `pip install -r requirements.txt` 安装依赖
+ - `pip install -r requirements.txt` 安装依赖，无法安装时在后面加上`-i https://pypi.tuna.tsinghua.edu.cn/simple`
  
 ## 2. 目录说明
 
