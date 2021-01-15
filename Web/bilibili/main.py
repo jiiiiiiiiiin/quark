@@ -77,7 +77,7 @@ class PyScope:
             self.screen.blit(pygame.transform.scale(img, (120, 57)), (0, 0))
 
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
+                if event.type == update_info:
                     self.get_fans(self.uid)
                 elif event.type == QUIT:
                     pygame.quit()
