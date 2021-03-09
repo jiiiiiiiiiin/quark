@@ -7,3 +7,11 @@
  - Hardware
     - `Schematic_Quark-X_v1.pdf` 原理图
 
+<img src="pcb_image_1.png" style="zoom:50%;" />
+
+<img src="pcb_image_2.png" style="zoom: 50%;" />
+
+
+
+
+
